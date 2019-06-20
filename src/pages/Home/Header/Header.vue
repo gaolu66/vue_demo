@@ -18,13 +18,18 @@
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   .homeHeader
+    position fixed
+    top 0
+    left 0
+    z-index 7
     height 88px
-    width 100%
+    width 750px
     padding 16px 24px
     box-sizing border-box
     display flex
     align-items center
     justify-content space-around
+    background #fff
     .logo
       display inline-block
       width 140px

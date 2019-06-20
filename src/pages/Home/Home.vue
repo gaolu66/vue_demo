@@ -34,45 +34,47 @@
         </ul>
       </div>
     </div>
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <a href="javascript:;">
-            <div>
-              <img src="https://yanxuan.nosdn.127.net/a89606c3c2cde5ee374e073bae08af0d.jpg?imageView&quality=75&thumbnail=750x0" alt="">
-            </div>
-          </a>
+    <div class="homeSwiper">
+      <div class="swiper-container swiper-home">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <a href="javascript:;">
+              <div>
+                <img src="https://yanxuan.nosdn.127.net/a89606c3c2cde5ee374e073bae08af0d.jpg?imageView&quality=75&thumbnail=750x0" alt="">
+              </div>
+            </a>
+          </div>
+          <div class="swiper-slide">
+            <a href="javascript:;">
+              <div>
+                <img src="https://yanxuan.nosdn.127.net/60e4ba11fdb8320eda453427bf287639.jpg?imageView&quality=75&thumbnail=750x0" alt="">
+              </div>
+            </a>
+          </div>
+          <div class="swiper-slide">
+            <a href="javascript:;">
+              <div>
+                <img src="https://yanxuan.nosdn.127.net/b97b16feb75f78121c8fab18ae85300c.jpg?imageView&quality=75&thumbnail=750x0" alt="">
+              </div>
+            </a>
+          </div>
+          <div class="swiper-slide">
+            <a href="javascript:;">
+              <div>
+                <img src="https://yanxuan.nosdn.127.net/a2b4bcc5a668b35a2820061022904fa8.jpg?watermark&type=1&gravity=northwest&dx=0&dy=0&image=YzBiN2Y3OTJmMWM4MGJjNzM3YmU4MTIwMTNlNDU4NGQucG5n|imageView&quality=75&thumbnail=750x0" alt="">
+              </div>
+            </a>
+          </div>
+          <div class="swiper-slide">
+            <a href="javascript:;">
+              <div>
+                <img src="https://yanxuan.nosdn.127.net/7fc841255b8e9b79243f1312949e5403.jpg?watermark&type=1&gravity=northwest&dx=0&dy=0&image=YzBiN2Y3OTJmMWM4MGJjNzM3YmU4MTIwMTNlNDU4NGQucG5n|imageView&quality=75&thumbnail=750x0" alt="">
+              </div>
+            </a>
+          </div>
         </div>
-        <div class="swiper-slide">
-          <a href="javascript:;">
-            <div>
-              <img src="https://yanxuan.nosdn.127.net/60e4ba11fdb8320eda453427bf287639.jpg?imageView&quality=75&thumbnail=750x0" alt="">
-            </div>
-          </a>
-        </div>
-        <div class="swiper-slide">
-          <a href="javascript:;">
-            <div>
-              <img src="https://yanxuan.nosdn.127.net/b97b16feb75f78121c8fab18ae85300c.jpg?imageView&quality=75&thumbnail=750x0" alt="">
-            </div>
-          </a>
-        </div>
-        <div class="swiper-slide">
-          <a href="javascript:;">
-            <div>
-              <img src="https://yanxuan.nosdn.127.net/a2b4bcc5a668b35a2820061022904fa8.jpg?watermark&type=1&gravity=northwest&dx=0&dy=0&image=YzBiN2Y3OTJmMWM4MGJjNzM3YmU4MTIwMTNlNDU4NGQucG5n|imageView&quality=75&thumbnail=750x0" alt="">
-            </div>
-          </a>
-        </div>
-        <div class="swiper-slide">
-          <a href="javascript:;">
-            <div>
-              <img src="https://yanxuan.nosdn.127.net/7fc841255b8e9b79243f1312949e5403.jpg?watermark&type=1&gravity=northwest&dx=0&dy=0&image=YzBiN2Y3OTJmMWM4MGJjNzM3YmU4MTIwMTNlNDU4NGQucG5n|imageView&quality=75&thumbnail=750x0" alt="">
-            </div>
-          </a>
-        </div>
+        <div class="swiper-pagination"></div>
       </div>
-      <div class="swiper-pagination"></div>
     </div>
     <div class="serviceList">
       <ul>
@@ -106,6 +108,19 @@
         </li>
       </ul>
     </div>
+    <Sale/>
+    <Recommend :sceneLightList="sceneLightList" :personalShop="personalShop" 
+    :flashSale="flashSale" :newItemList="newItemList" :topicList="topicList"/>
+    <div class="homeFooter">
+      <div class="btnWrapper">
+        <a>下载APP</a>
+        <a>电脑版</a>
+      </div>
+      <div class="info">
+        <p>网易公司版权所有 © 1997-2019</p>
+        <p>食品经营许可证：JY13301080111719</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -114,6 +129,8 @@ import Swiper from 'swiper'
 import BScroll from 'better-scroll'
 import 'swiper/dist/css/swiper.css'
 import HomeHeader from './Header/Header'
+import Sale from './Sale/Sale'
+import Recommend from './Recommend/Recommend'
 import {reqHomeData} from '../../api'
 
   export default {
@@ -121,11 +138,18 @@ import {reqHomeData} from '../../api'
       return {
         type: 1,
         isShow: false,
-        imgNavList: []
+        imgNavList: [],
+        sceneLightList: [],
+        personalShop:[],
+        flashSale: [],
+        newItemList: [],
+        topicList: []
       }
     },
     components: {
-      HomeHeader
+      HomeHeader,
+      Sale,
+      Recommend
     },
     methods: {
       changeCate (index) {
@@ -138,26 +162,31 @@ import {reqHomeData} from '../../api'
       const result = await reqHomeData()
       if(result.code === 0){
         this.imgNavList = result.data.kingKongModule.kingKongList
+        this.sceneLightList = result.data.sceneLightShoppingGuideModule
+        this.personalShop = result.data.personalShop
+        this.flashSale = result.data.flashSaleModule.itemList
+        this.newItemList = result.data.newItemList
+        this.topicList = result.data.topicList
       }
       this.scroll = new BScroll('.cateList-wapper', {
         scrollX: true,
         click: true
       })
-      new Swiper('.swiper-container', {
+      new Swiper('.swiper-home', {
         loop: true,
         slidesPerView: "auto",
         // loopedSlides: _this.bannerList.length,
         speed: 500,
         autoplay: {
           disableOnInteraction: false, //手动滑动之后不打断播放
-          delay: 2000
+          delay: 2500
         },
         // 如果需要分页器
         pagination: {
           el: '.swiper-pagination',
         }
       })
-      let swiperIcons = document.querySelector('.swiper-pagination').children
+      let swiperIcons = document.querySelector('.homeSwiper .swiper-pagination').children
       for (let index = 0; index < swiperIcons.length; index++) {
         swiperIcons[index].style.width = 20 + 'px'
         swiperIcons[index].style.height = 3 + 'px'
@@ -171,7 +200,11 @@ import {reqHomeData} from '../../api'
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-  .homeContainer
+  .homeContainer 
+    overflow hidden
+    padding-top 88px
+    box-sizing border-box
+    padding-bottom 100px
     width 100%
     .cateNav
       width 100%
@@ -247,18 +280,19 @@ import {reqHomeData} from '../../api'
             &.on
               color #b4282d
               border 1px solid #b4282d
-    .swiper-container
-      height 370px
-      width 100%
-      .swiper-wrapper
-        height 100%
+    .homeSwiper
+      .swiper-container
+        height 370px
         width 100%
-        .swiper-slide
+        .swiper-wrapper
           height 100%
           width 100%
-          img
+          .swiper-slide
             height 100%
             width 100%
+            img
+              height 100%
+              width 100%
     .serviceList
       ul
         box-sizing border-box
@@ -275,6 +309,8 @@ import {reqHomeData} from '../../api'
               font-size 32px
     .imgNav 
       height 341px
+      background-image url('https://yanxuan.nosdn.127.net/448d347a0b079f5cbb1a0b6dbbcacf87.png')
+      background-size 100% 100%
       .imgNavList 
         .imgNavItem 
           margin 10px 20px
@@ -287,5 +323,32 @@ import {reqHomeData} from '../../api'
             margin-bottom 10px
           span
             color #333
-
+    .homeFooter
+      height 245px
+      background #414141
+      overflow hidden
+      .btnWrapper
+        margin-top 54px
+        height 62px
+        text-align center
+        a 
+          height 124px
+          width 344px
+          border 1px solid #999
+          font-size 48px
+          color #fff
+          display inline-block
+          text-align center
+          line-height 124px
+          margin-right -150px
+          margin-left 20px
+          transform scale(0.5)
+          transform-origin 0 0
+      .info
+        margin-top 40px
+        color #999
+        font-size 24px
+        p
+         text-align center
+         margin-bottom 10px
 </style>

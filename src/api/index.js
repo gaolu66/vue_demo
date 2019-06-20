@@ -11,4 +11,7 @@ export const reqInputWord = (keywordPrefix) => ajax(BASE + 'http://m.you.163.com
 export const reqHomeData = () => ajax('/home') 
 
 //分类
-export const reqCategoryList = () => ajax('/categroy')
+export const reqCategoryList = () => ajax('/category')
+
+// 发现页数据
+export const reqTopic = (page,size) => ajax(BASE + 'http://m.you.163.com/topic/v1/find/recAuto.json', {page, size})

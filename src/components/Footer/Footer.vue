@@ -57,9 +57,11 @@
     position fixed
     bottom 0
     left 0
+    z-index 7
     display flex
     justify-content space-around
     box-sizing border-box
+    background #fff
     .footerItem
       display flex
       flex-direction column
