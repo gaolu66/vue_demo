@@ -195,7 +195,7 @@
         var date = new Date();
         var now = date.getTime();
         //设置截止时间
-        var endDate = new Date("2019-06-20 23:23:23");
+        var endDate = new Date("2019-06-22 23:23:23");
         var end = endDate.getTime();
         //时间差
         var leftTime = end - now;
@@ -209,8 +209,8 @@
         }
         //定义变量 d,h,m,s保存倒计时的时间
         if (leftTime >= 0) {
-            // d = Math.floor(leftTime / 1000 / 60 / 60 / 24);
-            this.h = toZero(Math.floor(leftTime / 1000 / 60 / 60 % 24));
+            const d = Math.floor(leftTime / 1000 / 60 / 60 / 24);
+            this.h = toZero(Math.floor(leftTime / 1000 / 60 / 60 % 24)+d*24);
             this.m = toZero(Math.floor(leftTime / 1000 / 60 % 60));
             this.s = toZero(Math.floor(leftTime / 1000 % 60));
         }else if(leftTime === 0){

@@ -1,0 +1,1 @@
+export const RECEIVE_TOPICS = 'receive_topics'

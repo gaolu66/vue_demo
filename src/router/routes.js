@@ -4,7 +4,7 @@ import Profile from '../pages/Profile/Profile'
 import Category from '../pages/Category/Category'
 import Topic from '../pages/Topic/Topic'
 import Search from '../pages/Search/Search'
-import Expert from '../pages/expert/expert'
+import Expert from '../pages/Expert/Expert'
 
 export default [
   {
@@ -34,10 +34,7 @@ export default [
   },
   {
     path: '/expert',
-    comments: Expert,
-    meta: {
-      isShowFoot: true
-    }
+    component: Expert
   },
   {
     path: '/category',
