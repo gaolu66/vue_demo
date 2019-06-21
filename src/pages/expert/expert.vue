@@ -37,12 +37,12 @@
     mounted () {
       new Swiper('.swiper-container',{
         loop: true,
-         slidesPerView: "auto",
+        slidesPerView: "auto",
         // loopedSlides: _this.bannerList.length,
-        speed: 1000,
+        speed: 600,
         autoplay: {
           disableOnInteraction: false, //手动滑动之后不打断播放
-          delay: 2500
+          delay: 1200
         }
       })
     }
@@ -61,10 +61,12 @@
         .swiper-container
           background #fff
           padding 20px 40px
+          box-sizing border-box
           .swiper-wrapper
             .swiper-slide
               margin-right 20px
               a
+                display inline-block
                 img 
                   height 372px
                   width 670px

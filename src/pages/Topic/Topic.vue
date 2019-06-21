@@ -86,7 +86,7 @@
             }
             topic.push(this.newTopicsResult[i].topics)
           }
-          this.newTopics = this.newTopics.concat(topic.flat())
+          this.newTopics = topic.flat()
         }
         this.$nextTick(() => {
           this.myScroll.refresh() // DOM 结构发生变化后，重新初始化BScroll

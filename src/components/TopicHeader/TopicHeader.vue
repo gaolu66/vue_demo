@@ -27,7 +27,7 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   .topicHeader
     height 100px
-    width 100%
+    width 750px
     padding-left 20px
     box-sizing border-box
     background #fafafa

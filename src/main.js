@@ -6,9 +6,11 @@ import router from './router'
 import store from './vuex/store'
 import 'lib-flexible/flexible'
 import './mock/mock.server'
+import './validate'
 
 Vue.config.productionTip = false
 Vue.store = store
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

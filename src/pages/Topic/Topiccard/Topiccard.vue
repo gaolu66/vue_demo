@@ -1,7 +1,7 @@
 <template>
   <div class="topicCardContainer">
     <div v-for="(item, index) in newTopicCarts.length?newTopicCarts:topics" :key="index">
-      <div class="cardContainer" v-show="item.style===1">
+      <div class="cardContainer" v-if="item.style===1">
         <div class="cardTitle">
           <span class="avater">
             <img :src="item.avatar">
@@ -12,10 +12,10 @@
         <img class="bigPic" :src="item.picUrl">
         <span class="iconItem">
           <i class="iconfont icon-yanjing"></i>
-          <span>{{item.readCount}}人看过</span>
+          <span>{{(item.readCount*1)<=10000?item.readCount:(Math.round(item.readCount/10000)+'w')}}人看过</span>
         </span>
       </div>
-      <div class="cardContainer" v-show="item.style===2">
+      <div class="cardContainer" v-if="item.style===2">
         <div class="cardTitle">
           <span class="avater">
             <img :src="item.avatar">
@@ -26,13 +26,13 @@
         <span class="subTitle" >{{item.subTitle}}</span>
         <span class="iconItem">
           <i class="iconfont icon-yanjing"></i>
-          <span>{{item.readCount}}人看过</span>
+          <span>{{(item.readCount*1)<=10000?item.readCount:(Math.round(item.readCount/10000)+'w')}}人看过</span>
         </span>
         <div class="smallPic">
           <img :src="item.picUrl">
         </div>
       </div>
-      <div class="cardContainer" v-show="!item.style">
+      <div class="cardContainer" v-if="!item.style">
         <div class="cardTitle">
           <span class="avater">
             <img :src="item.avatar">
@@ -40,17 +40,48 @@
           <span>{{item.nickname}}</span>
         </div>
         <div class="cardContent">{{item.content}}</div>
-        <img class="ratePic" src="https://yanxuan.nosdn.127.net/41c15b4b2b5fcac81927e803751a77a0.jpg">
+        <img class="ratePic" :src="item.lookPics?item.lookPics[0].picUrl:''">
         <span class="iconItem">
           <i class="iconfont icon-yanjing"></i>
-          <span>{{item.readCount}}人看过</span>
+          <span>{{(item.readCount*1)<=10000?item.readCount:(Math.round(item.readCount/10000)+'w')}}人看过</span>
         </span>
       </div>
+      <!-- <div class="cardContainer">
+        <div class="cardContent">新年=贴膘</div>
+        <div class="topicSwiper">
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <a href="javascript:;">
+                  <img src="https://yanxuan.nosdn.127.net/00ccc13879e46cae74ebb689ebb72496.jpg" alt="">
+                </a>
+              </div>
+              <div class="swiper-slide">
+                <a href="javascript:;">
+                  <img src="https://yanxuan.nosdn.127.net/7e146e4a8d7497175deb0d99e45b2f59.jpg" alt="">
+                </a>
+              </div>
+              <div class="swiper-slide">
+                <a href="javascript:;">
+                  <img src="https://yanxuan.nosdn.127.net/7e146e4a8d7497175deb0d99e45b2f59.jpg" alt="">
+                </a>
+              </div>
+              <div class="swiper-slide">
+                <a href="javascript:;">
+                  <img src="https://yanxuan.nosdn.127.net/7e146e4a8d7497175deb0d99e45b2f59.jpg" alt="">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import Swiper from 'swiper'
+  import 'swiper/dist/css/swiper.css'
   import {reqTopics} from '../../../api/index'
   export default {
     props: {
@@ -78,6 +109,15 @@
         this.topics = topic.flat()
       }
       console.log(this.topics)
+      new Swiper('swiper-container', {
+        slidesPerView: "auto",
+        // loopedSlides: _this.bannerList.length,
+        speed: 1000,
+        autoplay: {
+          disableOnInteraction: false, //手动滑动之后不打断播放
+          delay: 2500
+        }
+      })
     },
     computed: {
       newTopicCarts() {
@@ -118,15 +158,17 @@
             width 54px
             height 54px
       .cardContent
-        height 128px
+        max-height 100px
+        min-height 64px
         line-height 50px  
         font-size 36px
-        padding 12px 0
-        box-sizing border-box
+        margin 12px 0
         color #333
         overflow hidden
-        // white-space: nowrap
-        text-overflow: ellipsis
+        text-overflow ellipsis
+        display -webkit-box
+        -webkit-box-orient vertical
+        -webkit-line-clamp 2
       .bigPic 
         height 376px
         width 690px  
@@ -148,10 +190,15 @@
         box-sizing border-box
         color #333
         width 400px
+        overflow hidden
       .subTitle
         font-size 28px
         color #7f7f7f
         padding-bottom 20px
+        width 400px 
+        overflow hidden
+        text-overflow ellipsis
+        white-space nowrap
       .smallPic
         position absolute 
         top 30px
@@ -166,7 +213,22 @@
          top 0
          left -109px
       .ratePic
-        height 518px
+        width 690px
         margin-bottom 30px
         border-radius 10px
+      .topicSwiper
+        height 272px
+        .swiper-container
+          background #fff
+          padding 0 200px 
+          box-sizing border-box
+          .swiper-wrapper
+            .swiper-slide
+              margin-right 20px
+              a
+                display inline-block
+                img 
+                  height 272px
+                  width 272px
+                  border-radius 10px
 </style>
