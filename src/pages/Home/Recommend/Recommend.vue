@@ -179,7 +179,8 @@
       this.topicScroll = new BScroll('.topicListWraper', {
         scrollX: true,
         click: true,
-        momentum: false
+        momentum: false,
+        probeType: 2  
       })
       this.topicScroll.on('touchEnd',(pos)=>{
         

@@ -7,7 +7,7 @@
       </span>
       <span class="search_content">搜索商品,共25192款好物</span>
    </div>
-   <div class="login">登录</div>
+   <router-link to="/profile" class="login">登录</router-link>
  </div>
 </template>
 

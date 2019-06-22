@@ -58,9 +58,6 @@
         new BScroll('.leftWrap', {
           click: true
         })
-        new BScroll('.rightWrap', {
-          click: true
-        })
       })
     },
     watch: {

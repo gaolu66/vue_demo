@@ -19,7 +19,9 @@
       <span class="iconItem" @click="isShow = !isShow" :class="{change: isShow}">
         <i class="iconfont icon-xiala"></i>
       </span>
+      <div class="mask" v-show="isShow"></div>
       <div class="allCates" :class="{show: isShow}">
+        
         <span class="cateHeader">全部频道</span>
         <ul class="allCatesList">
           <li :class="{on : type===1}" @click="changeCate(1)">推荐</li>
@@ -202,13 +204,17 @@ import {reqHomeData} from '../../api'
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   .homeContainer 
     overflow hidden
-    padding-top 88px
+    padding-top 148px
     box-sizing border-box
     padding-bottom 100px
     width 100%
     .cateNav
+      position fixed
       width 100%
-      position relative
+      left 0
+      top 88px
+      z-index 3
+      background-color #fff
       .cateList-wapper
         width 648px
         overflow hidden
@@ -280,6 +286,14 @@ import {reqHomeData} from '../../api'
             &.on
               color #b4282d
               border 1px solid #b4282d
+      .mask
+        height 1246px
+        width 750px
+        background-color rgba(0,0,0,.5)
+        position absolute
+        left 0
+        top 0
+        z-index 2px
     .homeSwiper
       .swiper-container
         height 370px

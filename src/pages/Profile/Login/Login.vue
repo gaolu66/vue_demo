@@ -6,15 +6,16 @@
     <form>
       <section class="login_message">
         <input type="tel" maxlength="11" placeholder="请输入手机号" 
-        name="phone" v-model="phone" v-validate="{required: true,regex: /^1\d{10}$/}">
+        name="phone" v-model="phone" v-validate="'required|mobile'" @focus="phoneShow=false" @blur="phoneShow=true">
+        <i class="iconfont icon-delete" v-show="phone" @click="phone=''"></i>
       </section>
       <section class="login_message">
-        <input type="code" placeholder="请输入短信验证码" 
+        <input type="code" placeholder="请输入短信验证码" @focus="codeShow=false" @blur="codeShow=true"
         name="code" v-model="code" v-validate="'required'">
         <button class="get_verification">获取验证码</button>
       </section>
-      <span v-show="errors.has('code')" style="color: red">{{ errors.first('code') }}</span>
-      <span v-show="errors.has('phone')" style="color: red">{{ errors.first('phone') }}</span>
+      <span v-show="codeShow&&errors.has('code')" style="color: red">{{ errors.first('code') }}</span>
+      <span v-show="phoneShow&&errors.has('phone')" style="color: red">{{ errors.first('phone') }}</span>
       <section class="text">
         <span class="problem">遇到问题?</span>
         <span class="changePass">使用密码验证登录</span>
@@ -37,7 +38,9 @@
     data () {
       return {
         phone: '',
-        code: ''
+        code: '',
+        codeShow: false,
+        phoneShow: false
       }
     },
     methods: {
@@ -76,6 +79,12 @@
       width 100%
       margin-top 30px
       position relative
+      .iconfont
+        position absolute
+        top 30px
+        right 20px
+        font-size 14px
+        color #ccc
       input 
         outline none
         height 93px

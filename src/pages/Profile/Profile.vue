@@ -1,7 +1,8 @@
 <template>
   <div class="ProfileContainer">
     <TopicHeader>
-      <img slot="logo" src="//yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/indexLogo-a90bdaae6b.png" alt="">
+      <img slot="logo" @click="$router.push('/')"
+      src="//yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/indexLogo-a90bdaae6b.png" alt="">
     </TopicHeader>
     <div v-if="type===0" class="loginContainer">
       <img class="logoPic" src="//yanxuan.nosdn.127.net/bd139d2c42205f749cd4ab78fa3d6c60.png" alt="">
